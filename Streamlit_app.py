@@ -19,7 +19,7 @@ with st.sidebar:
 
  # Store chat messages, and initialize the chat message history
 if 'messages' not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Ask me a question about the 2022 tax return filing!"}]
+    st.session_state.messages = [{"role": "assistant", "content": "I am your assistant. Ask me something!"}]
 
 # Display the prior chat messages
 for message in st.session_state.messages:
