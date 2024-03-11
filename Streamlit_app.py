@@ -24,11 +24,11 @@ if 'messages' not in st.session_state.keys():
 # Display the prior chat messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        st.write(message["content"])
+        st.write(message["content"].replace("$","\$"))
 
 # User-provided prompt
 if prompt := st.chat_input(disabled=not openai_key):
-    st.session_state.messages.append({"role": "user", "content": prompt.replace("$","\$")})
+    st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.write(prompt.replace("$","\$"))
 
@@ -49,4 +49,4 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             response = get_assistant_response(st.session_state.messages)
             st.write(response.replace("$","\$"))
-    st.session_state.messages.append({"role": "assistant", "content": response.replace("$","\$")}) # Add response to message history
+    st.session_state.messages.append({"role": "assistant", "content": response}) # Add response to message history
