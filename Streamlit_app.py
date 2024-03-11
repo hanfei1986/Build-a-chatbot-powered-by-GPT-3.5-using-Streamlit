@@ -6,12 +6,12 @@ st.title("Chatbot powered by GPT3.5")
 
 # Sidebar for entering OpenAI key
 with st.sidebar:
-    st.title('OpenAI key')
+    st.title('Enter OpenAI API key here:')
     if 'openai_key' in st.secrets:
         st.success('OpenAI key already provided!', icon='✅')
         openai_key = st.secrets['openai_key']
     else:
-        openai_key = st.text_input('Enter OpenAI key:', type='password')
+        openai_key = st.text_input('Enter OpenAI API key here:', type='password', label_visibility="collapsed")
         if not openai_key:
             st.warning('Please enter your OpenAI key!', icon='⚠️')
         else:
@@ -28,9 +28,9 @@ for message in st.session_state.messages:
 
 # User-provided prompt
 if prompt := st.chat_input(disabled=not openai_key):
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append({"role": "user", "content": prompt.replace("$","\$")})
     with st.chat_message("user"):
-        st.write(prompt)
+        st.write(prompt.replace("$","\$"))
 
 openai.api_key = openai_key
 
@@ -48,6 +48,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             response = get_assistant_response(st.session_state.messages)
-            st.write(response)
-    message = {"role": "assistant", "content": response}
-    st.session_state.messages.append(message) # Add response to message history
+            st.write(response.replace("$","\$"))
+    st.session_state.messages.append({"role": "assistant", "content": response.replace("$","\$")}) # Add response to message history
