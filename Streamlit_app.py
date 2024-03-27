@@ -2,7 +2,7 @@ import streamlit as st
 import openai
 
 st.set_page_config(page_title="Chatbot powered by GPT-3.5 Turbo", page_icon="🦙", layout="centered", initial_sidebar_state="auto", menu_items=None)
-st.title("Chatbot powered by GPT3.5")
+st.title("Chatbot powered by GPT-3.5 Turbo")
 
 # Sidebar for entering OpenAI key
 with st.sidebar:
