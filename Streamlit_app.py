@@ -19,7 +19,7 @@ with st.sidebar:
 
 # Store chat messages, and initialize the chat message history
 if 'messages' not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "I am your assistant. Ask me something!"}]
+    st.session_state.messages = [{"role": "assistant", "content": "I am your AI assistant. Ask me something!"}]
 
 # Display the prior chat messages
 for message in st.session_state.messages:
@@ -49,4 +49,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             response = get_assistant_response(st.session_state.messages)
             st.write(response.replace("$","\$"))
-    st.session_state.messages.append({"role": "assistant", "content": response}) # Add response to message history
+    # Add response to message history        
+    st.session_state.messages.append({"role": "assistant", "content": response}) 
